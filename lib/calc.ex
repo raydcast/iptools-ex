@@ -6,7 +6,7 @@ defmodule IP.Calc do
     with true <- calc_cidr(cidr) > index do
       ip_by_index =
         (length(net_addr) - 1)
-        |> calc_ip(net_addr, index, [])
+        |> calc_ip(net_addr, index)
         |> ip_to_string()
 
       {:ok, ip_by_index}
@@ -28,6 +28,8 @@ defmodule IP.Calc do
   end
 
   defp calc_cidr(cidr), do: Bitwise.bsl(1, 32 - cidr)
+
+  defp calc_ip(base, net, index, ip \\ [])
 
   defp calc_ip(-1, [], _index, ip), do: Enum.reverse(ip)
 
